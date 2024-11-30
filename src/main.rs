@@ -1,18 +1,22 @@
 use std::env;
 use std::fs;
-fn main(){
-    let args :Vec<String>=env::args().collect();
-    let _quary=&args[1];
-    let filepath=&args[2];
-    let filepath2=&args[3];
+fn main() {
+    let args: Vec<String> = env::args().collect();
+    let config=Config::new(&args);
+    let text = fs::read_to_string(&config.filepath).expect("Failed");
 
-
-    let text=fs::read_to_string(filepath).expect("Failed");
-    let text2=fs::read_to_string(filepath2).expect("Failed");
-    println!("The poem is \n{}",text);
-    println!("Test File  \n{}",text2);
-
-
-
-
+    println!("The poem is \n{}", text);
+}
+struct Config {
+    filepath: String,
+    query: String,
+}
+impl Config {
+    fn new(arg:&[String])->Config{
+        let config=Config{
+            query:arg[1].clone(),
+            filepath:arg[2].clone()
+        };
+        config
+    }
 }
