@@ -1,1 +1,2 @@
-My name is Subhan Asghar 
+ cargo run -- this poem.txt
+ cargo run -- frog poem.txt
